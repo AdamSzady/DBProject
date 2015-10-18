@@ -1,0 +1,9 @@
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\DataAccess.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\DataAccess.pdb
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\EntityFramework.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\EntityFramework.xml
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\obj\Debug\DataAccess.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\DataAccess\obj\Debug\DataAccess.pdb

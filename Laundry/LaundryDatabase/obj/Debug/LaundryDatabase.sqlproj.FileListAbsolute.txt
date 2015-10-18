@@ -1,0 +1,5 @@
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\LaundryDatabase\bin\Debug\LaundryDatabase.dacpac
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\LaundryDatabase\bin\Debug\LaundryDatabase.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\LaundryDatabase\bin\Debug\LaundryDatabase.pdb
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\LaundryDatabase\obj\Debug\LaundryDatabase.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\LaundryDatabase\obj\Debug\LaundryDatabase.pdb

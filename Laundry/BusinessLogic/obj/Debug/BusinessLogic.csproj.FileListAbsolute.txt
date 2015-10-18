@@ -1,0 +1,12 @@
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\BusinessLogic.dll.config
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\BusinessLogic.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\BusinessLogic.pdb
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\DataAccess.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\EntityFramework.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\DataAccess.pdb
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\EntityFramework.xml
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\obj\Debug\BusinessLogic.dll
+F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\Laundry\BusinessLogic\obj\Debug\BusinessLogic.pdb
