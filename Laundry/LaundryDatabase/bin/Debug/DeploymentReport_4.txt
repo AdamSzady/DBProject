@@ -1,0 +1,33 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[AspNetRoles].[RoleNameIndex] (Index)
+       [dbo].[AspNetUserClaims].[IX_UserId] (Index)
+       [dbo].[AspNetUserLogins].[IX_UserId] (Index)
+       [dbo].[AspNetUserRoles].[IX_RoleId] (Index)
+       [dbo].[AspNetUserRoles].[IX_UserId] (Index)
+     Create
+       [dbo].[OrderParts] (Table)
+       [dbo].[Orders] (Table)
+       [dbo].[Prices] (Table)
+       [dbo].[Services] (Table)
+       Default Constraint: unnamed constraint on [dbo].[OrderParts] (Default Constraint)
+       Foreign Key: unnamed constraint on [dbo].[OrderParts] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Orders] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Orders] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Prices] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Prices] (Foreign Key)
+
+** Supporting actions
+
+The project and target databases have different collation settings. Deployment errors might occur.
+
