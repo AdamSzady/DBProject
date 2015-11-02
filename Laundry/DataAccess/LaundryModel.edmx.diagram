@@ -5,15 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b0a71193394a4358906e20314c4da55b" Name="Diagram1">
-        <EntityTypeShape EntityType="LaundryModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaundryModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaundryModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaundryModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaundryModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetUserLogins" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LaundryModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaundryModel.Things" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaundryModel.Things" Width="1.5" PointX="2.5" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="LaundryModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LaundryModel.Zlecenia" Width="1.5" PointX="5.125" PointY="1.375" />
+        <EntityTypeShape EntityType="LaundryModel.Wizyty" Width="1.5" PointX="5.125" PointY="4.75" />
+        <EntityTypeShape EntityType="LaundryModel.PozycjeZlecenia" Width="1.5" PointX="7.25" PointY="1.375" />
+        <EntityTypeShape EntityType="LaundryModel.Ceny" Width="1.5" PointX="7.25" PointY="4.375" />
+        <EntityTypeShape EntityType="LaundryModel.Uslugi" Width="1.5" PointX="9.5" PointY="5.375" />
+        <EntityTypeShape EntityType="LaundryModel.Rzeczy" Width="1.5" PointX="9.5" PointY="3.125" />
+        <AssociationConnector Association="LaundryModel.ZleceniaPozycjeZlecenia" />
+        <AssociationConnector Association="LaundryModel.AspNetUsersZlecenia" />
+        <AssociationConnector Association="LaundryModel.AspNetUsersWizyty" />
+        <AssociationConnector Association="LaundryModel.CenyRzeczy" />
+        <AssociationConnector Association="LaundryModel.CenyUslugi" />
+        <AssociationConnector Association="LaundryModel.PozycjeZleceniaCeny" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

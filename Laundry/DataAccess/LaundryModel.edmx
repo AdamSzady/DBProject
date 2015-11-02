@@ -216,6 +216,8 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Zlecenia" Relationship="LaundryModel.AspNetUsersZlecenia" FromRole="AspNetUsers" ToRole="Zlecenia" />
+          <NavigationProperty Name="Wizyty" Relationship="LaundryModel.AspNetUsersWizyty" FromRole="AspNetUsers" ToRole="Wizyty" />
         </EntityType>
         <EntityType Name="Things">
           <Key>
@@ -274,7 +276,147 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="ZleceniaSet" EntityType="LaundryModel.Zlecenia" />
+          <EntitySet Name="WizytySet" EntityType="LaundryModel.Wizyty" />
+          <EntitySet Name="PozycjeZleceniaSet" EntityType="LaundryModel.PozycjeZlecenia" />
+          <EntitySet Name="CenySet" EntityType="LaundryModel.Ceny" />
+          <EntitySet Name="UslugiSet" EntityType="LaundryModel.Uslugi" />
+          <EntitySet Name="RzeczySet" EntityType="LaundryModel.Rzeczy" />
+          <AssociationSet Name="ZleceniaPozycjeZlecenia" Association="LaundryModel.ZleceniaPozycjeZlecenia">
+            <End Role="Zlecenia" EntitySet="ZleceniaSet" />
+            <End Role="PozycjeZlecenia" EntitySet="PozycjeZleceniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUsersZlecenia" Association="LaundryModel.AspNetUsersZlecenia">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Zlecenia" EntitySet="ZleceniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUsersWizyty" Association="LaundryModel.AspNetUsersWizyty">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Wizyty" EntitySet="WizytySet" />
+          </AssociationSet>
+          <AssociationSet Name="CenyRzeczy" Association="LaundryModel.CenyRzeczy">
+            <End Role="Ceny" EntitySet="CenySet" />
+            <End Role="Rzeczy" EntitySet="RzeczySet" />
+          </AssociationSet>
+          <AssociationSet Name="CenyUslugi" Association="LaundryModel.CenyUslugi">
+            <End Role="Ceny" EntitySet="CenySet" />
+            <End Role="Uslugi" EntitySet="UslugiSet" />
+          </AssociationSet>
+          <AssociationSet Name="PozycjeZleceniaCeny" Association="LaundryModel.PozycjeZleceniaCeny">
+            <End Role="PozycjeZlecenia" EntitySet="PozycjeZleceniaSet" />
+            <End Role="Ceny" EntitySet="CenySet" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Zlecenia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdresNadania" Type="String" Nullable="false" />
+          <Property Name="DataNadania" Type="DateTime" Nullable="false" />
+          <Property Name="AdresOdbioru" Type="String" Nullable="false" />
+          <Property Name="DataOdbioru" Type="DateTime" Nullable="false" />
+          <Property Name="Koszt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PozycjeZlecenia" Relationship="LaundryModel.ZleceniaPozycjeZlecenia" FromRole="Zlecenia" ToRole="PozycjeZlecenia" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.AspNetUsersZlecenia" FromRole="Zlecenia" ToRole="AspNetUsers" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Wizyty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataWizyty" Type="DateTime" Nullable="false" />
+          <Property Name="CzasWizyty" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.AspNetUsersWizyty" FromRole="Wizyty" ToRole="AspNetUsers" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PozycjeZlecenia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ilosc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zlecenia" Relationship="LaundryModel.ZleceniaPozycjeZlecenia" FromRole="PozycjeZlecenia" ToRole="Zlecenia" />
+          <Property Name="ZleceniaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ceny" Relationship="LaundryModel.PozycjeZleceniaCeny" FromRole="PozycjeZlecenia" ToRole="Ceny" />
+        </EntityType>
+        <EntityType Name="Ceny">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cena" Type="String" Nullable="false" />
+          <NavigationProperty Name="Rzeczy" Relationship="LaundryModel.CenyRzeczy" FromRole="Ceny" ToRole="Rzeczy" />
+          <NavigationProperty Name="Uslugi" Relationship="LaundryModel.CenyUslugi" FromRole="Ceny" ToRole="Uslugi" />
+          <NavigationProperty Name="PozycjeZlecenia" Relationship="LaundryModel.PozycjeZleceniaCeny" FromRole="Ceny" ToRole="PozycjeZlecenia" />
+        </EntityType>
+        <EntityType Name="Uslugi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ceny" Relationship="LaundryModel.CenyUslugi" FromRole="Uslugi" ToRole="Ceny" />
+        </EntityType>
+        <EntityType Name="Rzeczy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" Nullable="false" />
+          <Property Name="Typ" Type="String" Nullable="false" />
+          <Property Name="Wielkosc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ceny" Relationship="LaundryModel.CenyRzeczy" FromRole="Rzeczy" ToRole="Ceny" />
+        </EntityType>
+        <Association Name="ZleceniaPozycjeZlecenia">
+          <End Type="LaundryModel.Zlecenia" Role="Zlecenia" Multiplicity="1" />
+          <End Type="LaundryModel.PozycjeZlecenia" Role="PozycjeZlecenia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zlecenia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PozycjeZlecenia">
+              <PropertyRef Name="ZleceniaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUsersZlecenia">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="LaundryModel.Zlecenia" Role="Zlecenia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zlecenia">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUsersWizyty">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="LaundryModel.Wizyty" Role="Wizyty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wizyty">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CenyRzeczy">
+          <End Type="LaundryModel.Ceny" Role="Ceny" Multiplicity="1" />
+          <End Type="LaundryModel.Rzeczy" Role="Rzeczy" Multiplicity="1" />
+        </Association>
+        <Association Name="CenyUslugi">
+          <End Type="LaundryModel.Ceny" Role="Ceny" Multiplicity="1" />
+          <End Type="LaundryModel.Uslugi" Role="Uslugi" Multiplicity="1" />
+        </Association>
+        <Association Name="PozycjeZleceniaCeny">
+          <End Type="LaundryModel.PozycjeZlecenia" Role="PozycjeZlecenia" Multiplicity="1" />
+          <End Type="LaundryModel.Ceny" Role="Ceny" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
