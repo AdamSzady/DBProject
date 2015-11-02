@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LaundryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LaundryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -14,6 +14,12 @@
           <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -66,12 +72,111 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderParts">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="PriceId" Type="int" />
+          <Property Name="Number" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="WorkerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GivingAddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="GivingDate" Type="datetime" />
+          <Property Name="ReceiveAddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="ReceiveDate" Type="datetime" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ThingId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Things">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__OrderPart__Order__29572725">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderParts" Type="Self.OrderParts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderParts">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ClientId__2A4B4B5E">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__WorkerId__2B3F6F97">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prices__ServiceI__2D27B809">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prices__ThingId__2C3393D0">
+          <End Role="Things" Type="Self.Things" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Things">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="ThingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -130,12 +235,43 @@
         </Association>
         <EntityContainer Name="LaundryModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderParts" EntityType="Self.OrderParts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderParts].[OrderId] AS [OrderId], 
+    [OrderParts].[PriceId] AS [PriceId], 
+    [OrderParts].[Number] AS [Number]
+    FROM [dbo].[OrderParts] AS [OrderParts]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__OrderPart__Order__29572725" Association="Self.FK__OrderPart__Order__29572725">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderParts" EntitySet="OrderParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ClientId__2A4B4B5E" Association="Self.FK__Orders__ClientId__2A4B4B5E">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__WorkerId__2B3F6F97" Association="Self.FK__Orders__WorkerId__2B3F6F97">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prices__ServiceI__2D27B809" Association="Self.FK__Prices__ServiceI__2D27B809">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prices__ThingId__2C3393D0" Association="Self.FK__Prices__ThingId__2C3393D0">
+            <End Role="Things" EntitySet="Things" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -153,8 +289,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LaundryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -216,12 +351,15 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__Orders__ClientId__2A4B4B5E" FromRole="AspNetUsers" ToRole="Orders" />
+          <NavigationProperty Name="Orders1" Relationship="LaundryModel.FK__Orders__WorkerId__2B3F6F97" FromRole="AspNetUsers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Things">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ThingId__2C3393D0" FromRole="Things" ToRole="Prices" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -274,7 +412,142 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="LaundryModel.C__RefactorLog" />
+          <EntitySet Name="Orders" EntityType="LaundryModel.Orders" />
+          <EntitySet Name="Prices" EntityType="LaundryModel.Prices" />
+          <EntitySet Name="Services" EntityType="LaundryModel.Services" />
+          <EntitySet Name="OrderParts" EntityType="LaundryModel.OrderParts" />
+          <AssociationSet Name="FK__Orders__ClientId__2A4B4B5E" Association="LaundryModel.FK__Orders__ClientId__2A4B4B5E">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__WorkerId__2B3F6F97" Association="LaundryModel.FK__Orders__WorkerId__2B3F6F97">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderPart__Order__29572725" Association="LaundryModel.FK__OrderPart__Order__29572725">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderParts" EntitySet="OrderParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prices__ServiceI__2D27B809" Association="LaundryModel.FK__Prices__ServiceI__2D27B809">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prices__ThingId__2C3393D0" Association="LaundryModel.FK__Prices__ThingId__2C3393D0">
+            <End Role="Things" EntitySet="Things" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WorkerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GivingAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="GivingDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceiveAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK__Orders__ClientId__2A4B4B5E" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="LaundryModel.FK__Orders__WorkerId__2B3F6F97" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderParts" Relationship="LaundryModel.FK__OrderPart__Order__29572725" FromRole="Orders" ToRole="OrderParts" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ThingId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="Services" Relationship="LaundryModel.FK__Prices__ServiceI__2D27B809" FromRole="Prices" ToRole="Services" />
+          <NavigationProperty Name="Things" Relationship="LaundryModel.FK__Prices__ThingId__2C3393D0" FromRole="Prices" ToRole="Things" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ServiceI__2D27B809" FromRole="Services" ToRole="Prices" />
+        </EntityType>
+        <EntityType Name="OrderParts">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="PriceId" Type="Int32" />
+          <Property Name="Number" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__OrderPart__Order__29572725" FromRole="OrderParts" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK__Orders__ClientId__2A4B4B5E">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="LaundryModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__WorkerId__2B3F6F97">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="LaundryModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderPart__Order__29572725">
+          <End Type="LaundryModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="LaundryModel.OrderParts" Role="OrderParts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderParts">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prices__ServiceI__2D27B809">
+          <End Type="LaundryModel.Services" Role="Services" Multiplicity="1" />
+          <End Type="LaundryModel.Prices" Role="Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prices__ThingId__2C3393D0">
+          <End Type="LaundryModel.Things" Role="Things" Multiplicity="1" />
+          <End Type="LaundryModel.Prices" Role="Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Things">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="ThingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -351,6 +624,54 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="LaundryModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="LaundryModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+                <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+                <ScalarProperty Name="GivingDate" ColumnName="GivingDate" />
+                <ScalarProperty Name="GivingAddress" ColumnName="GivingAddress" />
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="LaundryModel.Prices">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ThingId" ColumnName="ThingId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="LaundryModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderParts">
+            <EntityTypeMapping TypeName="LaundryModel.OrderParts">
+              <MappingFragment StoreEntitySet="OrderParts">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

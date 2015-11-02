@@ -31,5 +31,10 @@ namespace DataAccess
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Things> Things { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Prices> Prices { get; set; }
+        public virtual DbSet<Services> Services { get; set; }
+        public virtual DbSet<OrderParts> OrderParts { get; set; }
     }
 }

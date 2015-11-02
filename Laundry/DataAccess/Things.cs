@@ -14,6 +14,15 @@ namespace DataAccess
     
     public partial class Things
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Things()
+        {
+            this.Prices = new HashSet<Prices>();
+        }
+    
         public int Id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prices> Prices { get; set; }
     }
 }
