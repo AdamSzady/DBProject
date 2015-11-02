@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[Prices]
-(
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [ThingId] INT NOT NULL FOREIGN KEY REFERENCES Things(Id), 
-    [ServiceId] INT NOT NULL FOREIGN KEY REFERENCES Services(Id), 
-    [Price] FLOAT NULL
-)
