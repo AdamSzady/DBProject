@@ -24,7 +24,6 @@ namespace DataAccess
         public Nullable<double> Price { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual OrderParts OrderParts { get; set; }
     }
 }

@@ -14,11 +14,19 @@ namespace DataAccess
     
     public partial class Prices
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Prices()
+        {
+            this.OrderParts = new HashSet<OrderParts>();
+        }
+    
         public int Id { get; set; }
         public int ThingId { get; set; }
         public int ServiceId { get; set; }
         public Nullable<double> Price { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderParts> OrderParts { get; set; }
         public virtual Services Services { get; set; }
         public virtual Things Things { get; set; }
     }

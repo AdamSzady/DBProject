@@ -1,16 +1,6 @@
 ﻿CREATE TABLE [dbo].[Prices](
-	[Id] [int] NOT NULL,
-	[ThingId] [int] NOT NULL,
-	[ServiceId] [int] NOT NULL,
+	[Id] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[ThingId] [int] NOT NULL FOREIGN KEY REFERENCES [dbo].[Things] ([Id]),
+	[ServiceId] [int] NOT NULL FOREIGN KEY REFERENCES [dbo].[Services] ([Id]),
 	[Price] [float] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[Prices]  WITH CHECK ADD FOREIGN KEY([ServiceId])
-REFERENCES [dbo].[Services] ([Id])
-GO
-ALTER TABLE [dbo].[Prices]  WITH CHECK ADD FOREIGN KEY([ThingId])
-REFERENCES [dbo].[Things] ([Id])
+)

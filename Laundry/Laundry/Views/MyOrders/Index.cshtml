@@ -1,0 +1,30 @@
+﻿
+@using Laundry.Models
+@model MyOrders
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+@foreach (var ord in Model.Orders)
+{
+    <tr>
+        @ord.Order.Id
+        @foreach(var or in ord.Parts)
+        {
+            <td>
+                @or.Number
+            </td>
+        }
+    </tr>
+}
+</table>
+<button onclick="AddOrder()">Dodaj</button>
+<div id="NewOrder">
+    @if(Model.NewOrder != null)
+    {
+        @Html.Partial("_NewOrder", Model.NewOrder)
+    }
+</div>

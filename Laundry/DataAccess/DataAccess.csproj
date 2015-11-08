@@ -63,12 +63,6 @@
     <Compile Include="AspNetUsers.cs">
       <DependentUpon>LaundryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>LaundryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="C__RefactorLog.cs">
-      <DependentUpon>LaundryModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="LaundryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

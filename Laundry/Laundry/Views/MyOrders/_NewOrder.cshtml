@@ -1,0 +1,47 @@
+﻿@using Laundry.Models
+@model NewOrder
+
+
+
+@using (Html.BeginForm("AddOrder", "MyOrders", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Label("Adres nadania:")
+    @Html.TextBoxFor(m => m.Order.GivingAddress)
+    <br />
+    @Html.Label("Data nadania:")
+    @Html.TextBoxFor(m => m.Order.GivingDate)
+    <br />
+    @Html.Label("Adres odbioru:")
+    @Html.TextBoxFor(m => m.Order.ReceiveAddress)
+    <br />
+    @Html.Label("Data odbioru:")
+    @Html.TextBoxFor(m => m.Order.ReceiveDate)
+    <br />
+    @Html.Label("Cena:")
+    @Html.TextBoxFor(m => m.Order.Price)
+    <br />
+    <input type="submit" value="Dodaj" class="btn btn-default" />
+}
+
+@if (Model.OrderParts != null)
+{
+    foreach (var p in Model.OrderParts)
+    {
+        <div>
+            @p.Service
+            @p.Thing
+            @p.Number
+        </div>
+    }
+}
+<br />
+<br />
+@if (Model.Services != null)
+{
+    @Html.DropDownList("service", Model.Services.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }))
+    @Html.DropDownList("thing", Model.Things.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }))
+    @Html.TextBox("number")
+    <button onclick="AddPart()">Dodaj</button>
+}
+
+

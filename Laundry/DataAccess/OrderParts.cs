@@ -19,5 +19,6 @@ namespace DataAccess
         public Nullable<int> Number { get; set; }
     
         public virtual Orders Orders { get; set; }
+        public virtual Prices Prices { get; set; }
     }
 }

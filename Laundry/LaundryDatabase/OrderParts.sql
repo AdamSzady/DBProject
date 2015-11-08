@@ -1,10 +1,5 @@
 ﻿CREATE TABLE [dbo].[OrderParts](
-	[OrderId] [int] NOT NULL,
-	[PriceId] [int] NULL,
-	[Number] [int] NULL
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[OrderParts]  WITH CHECK ADD FOREIGN KEY([OrderId])
-REFERENCES [dbo].[Orders] ([Id])
-GO
-ALTER TABLE [dbo].[OrderParts] ADD  DEFAULT ((1)) FOR [Number]
+	[OrderId] [int] NOT NULL FOREIGN KEY REFERENCES [dbo].[Orders] ([Id]),
+	[PriceId] [int] NULL FOREIGN KEY REFERENCES [dbo].[Prices] ([Id]),
+	[Number] [int] NULL DEFAULT 1
+)
