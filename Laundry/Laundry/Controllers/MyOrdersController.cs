@@ -50,7 +50,7 @@ namespace Laundry.Controllers
         public ActionResult AddOrder( NewOrder model )
         {
             model.Order.ClientId = User.Identity.GetUserId();
-            orderService.AddOrder(model.Order);
+            model.Order.Id = orderService.AddOrder(model.Order);
             model.Things = orderService.GetThingsList();
             model.Services = orderService.GetServicesList();
             var model2 = new MyOrders
@@ -59,11 +59,15 @@ namespace Laundry.Controllers
                 NewOrder = model,
             };
             return View("Index", model2);          
-        }      
-        
-        public ActionResult AddOrderPart(string number, int thingId, int serviceId)
+        }
+
+        [HttpPost]
+        public ActionResult AddOrderPart(int orderId, int number, int thingId, int serviceId)
         {
-            return PartialView("_NewOrder");
-        }                            
+            //           return PartialView("_NewOrder");
+            orderService.AddPart(orderId, thingId, serviceId, number);
+            return Json(true, JsonRequestBehavior.DenyGet);
+
+        }
     }
 }

@@ -9,13 +9,18 @@
 }
 
 function AddPart(){
-//	var num = $('[name=tcol1]')
+	var orderId = $("#orderId").val();
+	var serviceId = $('select[name=service]').val();
+	var thingId = $('select[name=thing]').val();
+	var number = $('input[name=number]').val();
 	$.ajax({
-		type: "GET",
-		url: 'MyOrders/AddPart',
-		data: new {number = },
+		type: "POST",
+		url: 'MyOrders/AddOrderPart',
+		data: JSON.stringify({orderId: orderId, serviceId: serviceId, thingId: thingId, number: number}),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8',
 		success: function(data){
-			$("#NewOrder").html(data);
+			$("#parts").append("dodano");
 		}
 	});
 }

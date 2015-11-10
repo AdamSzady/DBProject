@@ -6,25 +6,44 @@
 }
 
 <h2>Index</h2>
-
 <table>
-@foreach (var ord in Model.Orders)
-{
-    <tr>
-        @ord.Order.Id
-        @foreach(var or in ord.Parts)
-        {
-            <td>
-                @or.Number
-            </td>
-        }
-    </tr>
-}
-</table>
-<button onclick="AddOrder()">Dodaj</button>
-<div id="NewOrder">
-    @if(Model.NewOrder != null)
+    @foreach (var ord in Model.Orders)
     {
+        <tr>
+            <td>
+                @ord.Order.ReceiveAddress
+            </td>
+            <td>
+                @ord.Order.ReceiveDate
+            </td>
+            <td>
+                @ord.Order.Price
+            </td>
+        </tr>
+
+        foreach (var or in ord.Parts)
+        {
+            <tr>
+                <td>
+                    @or.Service
+                </td>
+                <td>
+                    @or.Thing
+                </td>
+            </tr>
+        }
+
+
+    }
+</table>
+<div id="NewOrder">
+    @if (Model.NewOrder != null)
+    {
+        <h3>New order:</h3>
         @Html.Partial("_NewOrder", Model.NewOrder)
+    }
+    else
+    {
+        <button onclick="AddOrder()">Dodaj</button>
     }
 </div>

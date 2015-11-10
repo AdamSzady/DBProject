@@ -1,7 +1,7 @@
 ﻿@using Laundry.Models
 @model NewOrder
 
-
+@Html.HiddenFor(m => m.Order.Id, new { @id = "orderId" })
 
 @using (Html.BeginForm("AddOrder", "MyOrders", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -17,29 +17,32 @@
     @Html.Label("Data odbioru:")
     @Html.TextBoxFor(m => m.Order.ReceiveDate)
     <br />
-    @Html.Label("Cena:")
-    @Html.TextBoxFor(m => m.Order.Price)
-    <br />
-    <input type="submit" value="Dodaj" class="btn btn-default" />
-}
-
-@if (Model.OrderParts != null)
-{
-    foreach (var p in Model.OrderParts)
+    if (Model.OrderParts == null)
     {
-        <div>
-            @p.Service
-            @p.Thing
-            @p.Number
-        </div>
+        <input type="submit" value="Dodaj" class="btn btn-default" />
     }
 }
+<div id="parts">
+    @if (Model.OrderParts != null)
+    {
+        foreach (var p in Model.OrderParts)
+        {
+            <div>
+                @p.Service
+                @p.Thing
+                @p.Number
+                <br />
+            </div>
+        }
+    }
+</div>
 <br />
 <br />
 @if (Model.Services != null)
 {
     @Html.DropDownList("service", Model.Services.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }))
     @Html.DropDownList("thing", Model.Things.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }))
+    @Html.Label("Liczba:")
     @Html.TextBox("number")
     <button onclick="AddPart()">Dodaj</button>
 }

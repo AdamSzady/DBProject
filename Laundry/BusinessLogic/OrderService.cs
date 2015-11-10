@@ -18,12 +18,25 @@ namespace BusinessLogic
             dbContext = new LaundryEntities();
         }
 
-        public void AddOrder(OrdersDTO order)
+        public int AddOrder(OrdersDTO order)
         {
             order.WorkerId = "123";
             Mapper.CreateMap<OrdersDTO, Orders>();
-            dbContext.Orders.Add(Mapper.Map<OrdersDTO, Orders>(order));
+            Orders newOrder = Mapper.Map<OrdersDTO, Orders>(order);
+            dbContext.Orders.Add(newOrder);
             dbContext.SaveChanges();
+            return newOrder.Id;
+        }
+
+        public void AddPart(int orderId, int thingId, int serviceId, int number)
+        {
+            var part = new OrderParts
+            {
+                OrderId = orderId,
+                PriceId = dbContext.Prices.Where(p => p.ServiceId == serviceId && p.ThingId == thingId).Select(p => p.Id).First(),
+                Number = number,
+            };
+            dbContext.OrderParts.Add(part);
         }
 
         public IEnumerable<SingleOrder> GetOrdersByClient(string userId)
