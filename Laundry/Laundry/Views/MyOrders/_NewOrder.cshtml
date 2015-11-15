@@ -9,13 +9,13 @@
     @Html.TextBoxFor(m => m.Order.GivingAddress)
     <br />
     @Html.Label("Data nadania:")
-    @Html.TextBoxFor(m => m.Order.GivingDate)
+    @Html.TextBoxFor(m => m.Order.GivingDate, new { @type = "datetime-local", @disabled = true, @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
     <br />
     @Html.Label("Adres odbioru:")
     @Html.TextBoxFor(m => m.Order.ReceiveAddress)
     <br />
     @Html.Label("Data odbioru:")
-    @Html.TextBoxFor(m => m.Order.ReceiveDate)
+    @Html.TextBoxFor(m => m.Order.ReceiveDate, new { @type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
     <br />
     if (Model.OrderParts == null)
     {
