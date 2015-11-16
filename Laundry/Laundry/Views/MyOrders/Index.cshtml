@@ -1,9 +1,7 @@
 ﻿@{
     ViewBag.Title = "Moje zamówienia";
-    ViewBag.Messages = "Moje zamówienia";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h1 class="text-center">@ViewBag.Title</h1>
 
 @using Laundry.Models
 @model MyOrders
@@ -38,14 +36,14 @@
 
     }
 </table>
-<div id="NewOrder">
+<div id="NewOrder" class="newOrder" >
     @if (Model.NewOrder != null)
     {
-        <h3>New order:</h3>
+        <h3>Nowe zamówienie:</h3>
         @Html.Partial("_NewOrder", Model.NewOrder)
     }
     else
     {
-        <button onclick="AddOrder()">Dodaj</button>
+        <button class="btn btn-default btn-success center" onclick="AddOrder()">Nowe zamówienie</button>
     }
 </div>

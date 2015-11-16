@@ -2,13 +2,12 @@
     ViewBag.Title = "Kontakt";
     ViewBag.Messages = new string[] { "Kontakt", "Jak dojechać?" };
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Messages[0]</h3>
-<address>
+<h1 class="text-center">@ViewBag.Title</h1>
+<address class="center">
     <strong>Adres:</strong> TODO <br />
     <strong>E-mail: </strong><a href="mailto:Support@example.com">pralnia@frania.pl</a><br />
 </address>
 <hr />
 
-<h3>@ViewBag.Messages[1]</h3>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.9634052085435!2d17.05828871524575!3d51.109135347565704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fe82aea631489%3A0xc3b8e7d3cb34d74!2sC-1%2C+Janiszewskiego%2C+52-007+Wroc%C5%82aw%2C+Polska!5e0!3m2!1spl!2spl!4v1447668216633" width="600" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+<h2 class="text-center">@ViewBag.Messages[1]</h2>
+<iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.9634052085435!2d17.05828871524575!3d51.109135347565704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fe82aea631489%3A0xc3b8e7d3cb34d74!2sC-1%2C+Janiszewskiego%2C+52-007+Wroc%C5%82aw%2C+Polska!5e0!3m2!1spl!2spl!4v1447668216633" frameborder="0" allowfullscreen></iframe>

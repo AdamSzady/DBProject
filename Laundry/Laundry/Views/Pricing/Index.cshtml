@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Cennik";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+
+@using Laundry.Models
+@model Pricing
+
+<table>
+    @foreach (var price in Model.Prices)
+    {
+        <tr>
+            <td>
+                @price.ThingId
+            </td>
+            <td>
+                @price.ServiceId
+            </td>
+            <td>
+                @price.Price
+            </td>
+        </tr>
+    }
+</table>
