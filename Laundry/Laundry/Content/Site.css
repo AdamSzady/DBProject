@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#map {
+    width: 600px;
+    height: 300px;
+}
+
+.map-infoWindow {
+    max-width: 100px;
+    max-height: 100px;
+}

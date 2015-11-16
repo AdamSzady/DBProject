@@ -1,11 +1,13 @@
-﻿
+﻿@{
+    ViewBag.Title = "Moje zamówienia";
+    ViewBag.Messages = "Moje zamówienia";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
 @using Laundry.Models
 @model MyOrders
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
 <table>
     @foreach (var ord in Model.Orders)
     {
