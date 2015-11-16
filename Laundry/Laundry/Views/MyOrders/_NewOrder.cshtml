@@ -5,21 +5,21 @@
 
 @using (Html.BeginForm("AddOrder", "MyOrders", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.Label("Adres nadania:")
-    @Html.TextBoxFor(m => m.Order.GivingAddress)
+    @Html.Label("Adres nadania:", new { @class = "newOrder-label" })
+    @Html.TextBoxFor(m => m.Order.GivingAddress, new { @class = "newOrder-input" })
     <br />
-    @Html.Label("Data nadania:")
-    @Html.TextBoxFor(m => m.Order.GivingDate)
+    @Html.Label("Data nadania:", new { @class = "newOrder-label" })
+    @Html.TextBoxFor(m => m.Order.GivingDate, new { @class = "newOrder-input", @type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
     <br />
-    @Html.Label("Adres odbioru:")
-    @Html.TextBoxFor(m => m.Order.ReceiveAddress)
+    @Html.Label("Adres odbioru:", new { @class = "newOrder-label" })
+    @Html.TextBoxFor(m => m.Order.ReceiveAddress, new { @class = "newOrder-input" })
     <br />
-    @Html.Label("Data odbioru:")
-    @Html.TextBoxFor(m => m.Order.ReceiveDate)
+    @Html.Label("Data odbioru:", new { @class = "newOrder-label" })
+    @Html.TextBoxFor(m => m.Order.ReceiveDate, new { @class = "newOrder-input", @type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
     <br />
     if (Model.OrderParts == null)
     {
-        <input type="submit" value="Dodaj" class="btn btn-default" />
+        <input class="btn btn-default btn-success center" type="submit" value="Dodaj"/>
     }
 }
 <div id="parts">
@@ -44,7 +44,7 @@
     @Html.DropDownList("thing", Model.Things.Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() }))
     @Html.Label("Liczba:")
     @Html.TextBox("number")
-    <button onclick="AddPart()">Dodaj</button>
+    <button class="btn btn-default btn-success center" onclick="AddPart()">Dodaj</button>
 }
 
 

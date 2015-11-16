@@ -24,3 +24,35 @@ function AddPart(){
 		}
 	});
 }
+
+function Modify(id){
+	var button = $("#button_"+id);
+	if($(button).attr('state') == 0)
+	{
+		$(button).attr('state', 1);
+		$(button).html("Zatwierdź");
+		var row = $("#"+id+">td.value");
+		row.html("<input id="+id+"/>");
+	}
+	else{
+		var price = $("#"+id+">td.value>input").val();
+		$.ajax({
+		type: "POST",
+		url: 'Pricing/Modify',
+		data: JSON.stringify({priceId: id, price: price}),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8',
+		success: function(data){
+			var row = $("#"+id+">td.value");
+			$(button).attr('state', 0);
+			$(button).html("Modyfikuj");
+			row.html(price);
+		}
+	});
+	}
+
+}
+
+function Accept(id){
+	
+}

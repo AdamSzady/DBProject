@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Models\OrderPartsDTO.cs" />
     <Compile Include="Models\ServicesDTO.cs" />
+    <Compile Include="Models\PricesDTO.cs" />
+    <Compile Include="Models\Price.cs" />
     <Compile Include="Models\ThingsDTO.cs" />
     <Compile Include="Models\OrdersDTO.cs" />
     <Compile Include="Models\SingleOrder.cs" />

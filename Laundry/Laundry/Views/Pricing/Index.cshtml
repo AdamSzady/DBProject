@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Cennik";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+
+@using Laundry.Models
+@model Pricing
+
+@if(User.IsInRole("Worker"))
+{
+    @Html.ActionLink("Dodaj", "AddPosition")
+}
+<table>
+    @foreach (var price in Model.Prices)
+    {
+        <tr id="@price.PriceId">
+            <td>
+                @price.ServiceName
+            </td>
+            <td>
+                @price.ThingName
+            </td>
+            <td class="value">
+                @price.Value
+            </td>
+            @if (User.IsInRole("Worker"))
+            {
+                <td class="button">
+                    <button id="button_@price.PriceId" state="0" onclick="Modify(@price.PriceId)">Modyfikuj</button>
+                </td>
+            }
+        </tr>
+    }
+</table>

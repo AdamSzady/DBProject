@@ -1,11 +1,11 @@
-﻿
+﻿@{
+    ViewBag.Title = "Moje zamówienia";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+
 @using Laundry.Models
 @model MyOrders
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
 <table>
     @foreach (var ord in Model.Orders)
     {
@@ -36,14 +36,14 @@
 
     }
 </table>
-<div id="NewOrder">
+<div id="NewOrder" class="newOrder" >
     @if (Model.NewOrder != null)
     {
-        <h3>New order:</h3>
+        <h3>Nowe zamówienie:</h3>
         @Html.Partial("_NewOrder", Model.NewOrder)
     }
     else
     {
-        <button onclick="AddOrder()">Dodaj</button>
+        <button class="btn btn-default btn-success center" onclick="AddOrder()">Nowe zamówienie</button>
     }
 </div>
