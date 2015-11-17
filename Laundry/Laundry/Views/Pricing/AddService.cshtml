@@ -1,0 +1,17 @@
+﻿@using MvcCheckBoxList.Model
+@model Laundry.Models.AddServiceModel
+@{
+    ViewBag.Title = "AddService";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddService</h2>
+
+@using (Html.BeginForm("AddService", "Pricing", FormMethod.Post))
+{
+    @Html.Label("Wpisz nazwę usługi")
+    @Html.TextBoxFor(m => m.Service.Name)
+
+    @Html.CheckBoxListFor(m => m.Posted.ServiceIDs, m => m.Things, s => s.Id, s => s.Name, m => m.Selected, Position.Horizontal)
+    <input type="submit" value="Dodaj" />
+}

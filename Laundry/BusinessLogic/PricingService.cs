@@ -46,5 +46,42 @@ namespace BusinessLogic
             dbContext.Prices.Find(priceId).Price = price;
             dbContext.SaveChanges();
         }
+
+        public void AddService(ServicesDTO serviceDTO, int[] things)
+        {
+            Mapper.CreateMap<ServicesDTO, Services>();
+            Services service = Mapper.Map<ServicesDTO, Services>(serviceDTO);
+            dbContext.Services.Add(service);
+            foreach (var price in things)
+            {
+                dbContext.Prices.Add(new Prices { ThingId = price, ServiceId = service.Id });
+            }
+            dbContext.SaveChanges();
+        }
+
+        public void DeletePrice(int id)
+        {
+            var price = dbContext.Prices.Find(id);
+            dbContext.Prices.Remove(price);
+            dbContext.SaveChanges();
+        }
+
+        public void DeleteService(int id)
+        {
+            var service = dbContext.Services.Find(id);
+            var prices = dbContext.Prices.Where(p => p.ServiceId == id);
+            dbContext.Prices.RemoveRange(prices);
+            dbContext.Services.Remove(service);
+            dbContext.SaveChanges();
+        }
+
+        public void DeleteThing(int id)
+        {
+            var thing = dbContext.Things.Find(id);
+            var prices = dbContext.Prices.Where(p => p.ThingId == id);
+            dbContext.Prices.RemoveRange(prices);
+            dbContext.Things.Remove(thing);
+            dbContext.SaveChanges();
+        }
     }
 }

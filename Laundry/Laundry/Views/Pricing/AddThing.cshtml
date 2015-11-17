@@ -1,13 +1,13 @@
 ﻿@using MvcCheckBoxList.Model
-@model Laundry.Models.AddThing
+@model Laundry.Models.AddThingModel
 @{
-    ViewBag.Title = "AddPosition";
+    ViewBag.Title = "AddThing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>AddPosition</h2>
 
-@using (Html.BeginForm("AddPosition", "Pricing", FormMethod.Post))
+@using (Html.BeginForm("AddThing", "Pricing", FormMethod.Post))
 {
 @Html.Label("Wpisz nazwę rzeczy")
     @Html.TextBoxFor(m => m.Thing.Name)

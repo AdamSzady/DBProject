@@ -28,12 +28,12 @@ namespace BusinessLogic
             return newOrder.Id;
         }
 
-        public void AddPart(int orderId, int thingId, int serviceId, int number)
+        public void AddPart(int orderId, int priceId, int number)
         {
             var part = new OrderParts
             {
                 OrderId = orderId,
-                PriceId = dbContext.Prices.Where(p => p.ServiceId == serviceId && p.ThingId == thingId).Select(p => p.Id).First(),
+                PriceId = priceId,
                 Number = number,
             };
             dbContext.OrderParts.Add(part);

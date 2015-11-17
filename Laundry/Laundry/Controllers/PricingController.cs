@@ -39,22 +39,42 @@ namespace Laundry.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddPosition()
+        public ActionResult AddThing()
         {
             var services = orderService.GetServicesList();
-            var model = new AddThing
+            var model = new AddThingModel
             {
                 Services = services,
                 Selected = new List<ServicesDTO>(),
-                Posted = new PostedServices { ServiceIDs = new int[0]},
+                Posted = new Posted { ServiceIDs = new int[0]},
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddPosition(AddThing addThing)
+        public ActionResult AddThing(AddThingModel addThing)
         {
             pricingService.AddThing(addThing.Thing, addThing.Posted.ServiceIDs);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult AddService()
+        {
+            var things = orderService.GetThingsList();
+            var model = new AddServiceModel
+            {
+                Things = things,
+                Selected = new List<ThingsDTO>(),
+                Posted = new Posted { ServiceIDs = new int[0] },
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddService(AddServiceModel addService)
+        {
+            pricingService.AddService(addService.Service, addService.Posted.ServiceIDs);
             return RedirectToAction("Index");
         }
 
@@ -65,5 +85,37 @@ namespace Laundry.Controllers
             return Json(true, JsonRequestBehavior.DenyGet);
 
         }
+
+        public ActionResult DeletePrice(int id)
+        {
+            pricingService.DeletePrice(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteThing()
+        {
+            var model = new DeleteThingModel
+            {
+                Things = orderService.GetThingsList(),
+                Services = orderService.GetServicesList()
+            };
+            return View("DeleteThing", model);
+        }
+
+        public ActionResult Delete(int id, Enums.ThingOrService what)
+        {
+            switch (what)
+            {
+                case Enums.ThingOrService.Service:
+                    pricingService.DeleteService(id);
+                    break;
+                case Enums.ThingOrService.Thing:
+                    pricingService.DeleteThing(id);
+                    break;
+            }
+            return RedirectToAction("DeleteThing");
+        }
+
     }
 }

@@ -12,17 +12,33 @@ namespace Laundry.Models
         public IEnumerable<Price> Prices { get; set; }
     }
 
-    public class AddThing
+    public class AddThingModel
     {
         public ThingsDTO Thing { get; set; }
         public List<PricesDTO> Prices { get; set; }
         public IEnumerable<ServicesDTO> Services { get; set; }
         public IEnumerable<ServicesDTO> Selected { get; set; }
-        public PostedServices Posted { get; set; }
+        public Posted Posted { get; set; }
     }
 
-    public class PostedServices
+    public class AddServiceModel
+    {
+        public ServicesDTO Service { get; set; }
+        public List<PricesDTO> Prices { get; set; }
+        public IEnumerable<ThingsDTO> Things { get; set; }
+        public IEnumerable<ThingsDTO> Selected { get; set; }
+        public Posted Posted { get; set; }
+    }
+
+    public class Posted
     {
         public int[] ServiceIDs { get; set; }
+    }
+
+    public class DeleteThingModel
+    {
+        public IEnumerable<ThingsDTO> Things { get; set; }
+        public IEnumerable<ServicesDTO> Services { get; set; }
+
     }
 }

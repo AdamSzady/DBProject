@@ -1,0 +1,29 @@
+﻿@using Laundry.Enums
+@model Laundry.Models.DeleteThingModel
+
+@{
+    ViewBag.Title = "DeleteThing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteThing</h2>
+<div class="container">
+    <div class="col-md-6">
+        @foreach (var thing in Model.Things)
+        {
+            <div class="row">
+                @thing.Name
+                @Html.ActionLink("Usuń", "Delete", new { id = thing.Id, what =  ThingOrService.Thing})
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        @foreach (var thing in Model.Services)
+        {
+            <div class="row">
+                @thing.Name
+                @Html.ActionLink("Usuń", "Delete", new { id = thing.Id, what = ThingOrService.Service })
+            </div>
+        }
+    </div>
+</div>

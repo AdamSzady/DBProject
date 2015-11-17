@@ -15,10 +15,12 @@ namespace Laundry.Controllers
     {
 
         private readonly OrderService orderService;
+        private readonly PricingService priceService;
 
         public MyOrdersController()
         {
             this.orderService = new OrderService();
+            this.priceService = new PricingService();
         }
 
         public MyOrdersController(OrderService orderService)
@@ -53,6 +55,7 @@ namespace Laundry.Controllers
             model.Order.Id = orderService.AddOrder(model.Order);
             model.Things = orderService.GetThingsList();
             model.Services = orderService.GetServicesList();
+            model.Prices = priceService.GetPricesList();
             var model2 = new MyOrders
             {
                 Orders = orderService.GetOrdersByClient(User.Identity.GetUserId()),
@@ -62,10 +65,10 @@ namespace Laundry.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddOrderPart(int orderId, int number, int thingId, int serviceId)
+        public ActionResult AddOrderPart(int orderId, int number, int priceId)
         {
             //           return PartialView("_NewOrder");
-            orderService.AddPart(orderId, thingId, serviceId, number);
+            orderService.AddPart(orderId, priceId, number);
             return Json(true, JsonRequestBehavior.DenyGet);
 
         }

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -177,6 +178,7 @@
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\MyOrdersController.cs" />
     <Compile Include="CookieConsent\CookieConsentAttribute.cs" />
+    <Compile Include="Enums\ThingOrService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -249,7 +251,9 @@
     <Content Include="Views\MyOrders\_NewOrder.cshtml" />
     <Content Include="Views\Pricing\Index.cshtml" />
     <Content Include="Views\Shared\_CookieConsentMessage.cshtml" />
-    <Content Include="Views\Pricing\AddPosition.cshtml" />
+    <Content Include="Views\Pricing\AddThing.cshtml" />
+    <Content Include="Views\Pricing\AddService.cshtml" />
+    <Content Include="Views\Pricing\DeleteThing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

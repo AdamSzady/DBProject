@@ -9,7 +9,12 @@
 
 @if(User.IsInRole("Worker"))
 {
-    @Html.ActionLink("Dodaj", "AddPosition")
+    @Html.ActionLink("Dodaj rzecz", "AddThing")
+    <br/>
+    @Html.ActionLink("Dodaj usługę  ", "AddService")
+    <br />
+    @Html.ActionLink("Usuń rzecz lub usługę", "DeleteThing")
+
 }
 <table>
     @foreach (var price in Model.Prices)
@@ -29,6 +34,10 @@
                 <td class="button">
                     <button id="button_@price.PriceId" state="0" onclick="Modify(@price.PriceId)">Modyfikuj</button>
                 </td>
+                <td >
+                   @Html.ActionLink("Usuń", "DeletePrice", new { id = price.PriceId }, new { @class="btn"})
+                </td>
+
             }
         </tr>
     }
