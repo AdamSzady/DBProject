@@ -8,7 +8,6 @@ using BusinessLogic;
 
 namespace Laundry.Controllers
 {
-    [CookieConsent]
     public class HomeController : Controller
     {
         public ActionResult Index()

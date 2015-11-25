@@ -177,7 +177,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\MyOrdersController.cs" />
-    <Compile Include="CookieConsent\CookieConsentAttribute.cs" />
+    <Compile Include="CookieConsent\CookieConsent.cs" />
     <Compile Include="Enums\ThingOrService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

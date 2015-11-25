@@ -226,3 +226,4 @@ C:\Users\sss\Desktop\DBProject\Laundry\Laundry\obj\Debug\Laundry.Web.csprojResol
 C:\Users\sss\Desktop\DBProject\Laundry\Laundry\obj\Debug\Laundry.dll
 C:\Users\sss\Desktop\DBProject\Laundry\Laundry\obj\Debug\Laundry.pdb
 F:\materialy_edukacyjne\sem_VII\InternetoweBazyDanych\repo2\DBProject\Laundry\Laundry\bin\MvcCheckBoxList.dll
+C:\Users\sss\Desktop\DBProject\Laundry\Laundry\bin\MvcCheckBoxList.dll
