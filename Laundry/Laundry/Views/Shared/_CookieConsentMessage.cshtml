@@ -1,13 +1,9 @@
 ﻿
-<div id="cookie-alert">
-    <div class="alert">
-        <p><strong>Ciasteczka</strong></p>
-        <p>Informujemy, że na naszej stronie używamy tzw. plików „cookies” (tłum. „ciasteczek”) oraz podobnych technologii. Czynimy to mając na celu działania o charakterze statystycznym, pragnąć dostosować system do indywidualnych potrzeb użytkownika oraz mając na względzie ułatwienie korzystania z naszego serwisu. Każdy może zaakceptować pliki cookies albo ma możliwość wyłączenia ich w przeglądarce, dzięki czemu nie będą zbierane żadne informacje.</p>
-        <form class="btn-group-vertical" action="@Url.Action("AllowCookies", "Home", new { ReturnUrl = Request.RawUrl })" method="post">
-            <input type="submit" name="allow" class="btn btn-info btn-xs" value="Rozumiem" />
-        </form>
-    </div>
+<div id="cookie-alert" data-show="false">
+    <h4><strong>Ciasteczka</strong></h4>
+    <p>Informujemy, że na naszej stronie używamy tzw. plików „cookies” (tłum. „ciasteczek”) oraz podobnych technologii. Czynimy to mając na celu działania o charakterze statystycznym, pragnąć dostosować system do indywidualnych potrzeb użytkownika oraz mając na względzie ułatwienie korzystania z naszego serwisu. Każdy może zaakceptować pliki cookies albo ma możliwość wyłączenia ich w przeglądarce, dzięki czemu nie będą zbierane żadne informacje.</p>
+    <input id="btnAcceptCookies" type="submit" name="allow" class="btn btn-info btn-sm" value="Rozumiem" />
 </div>
 
 <script defer src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script defer src="~/CookieConsent/asyncform.js"></script>
+<script defer src="~/Scripts/CookieConsent.js"></script>

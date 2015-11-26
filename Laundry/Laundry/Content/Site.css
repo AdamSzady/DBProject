@@ -45,13 +45,29 @@ h6 {
 }
 
 #cookie-alert {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #e0e0e0;
+    background: #c1c1c1;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 -1px 5px 2px black;
+    padding: 0 15px 15px 15px;
+    opacity: 1;
+    -moz-transition: opacity 1s 1s;
+    -o-transition: opacity 1s 1s;
+    -webkit-transition: opacity 1s 1s;
+    transition: opacity 1s 1s;
+}
+
+#cookie-alert[data-show="false"] {
+    padding: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
 }
 
 .home-wrapper {
@@ -93,6 +109,14 @@ h6 {
     padding: 0 1em 0 1em;
     display: block;
     width: 100%;
+}
+
+#parts {
+    display: none;
+}
+
+#parts[visible="true"] {
+    display: block;
 }
 
 hr {

@@ -35,10 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            @if (!CookieConsent.HasCookieConsent(ViewContext))
-            {
-                @Html.Partial("_CookieConsentMessage")
-            }
+            @Html.Partial("_CookieConsentMessage")
             <p>&copy; @DateTime.Now.Year - Pralnia frania</p>
         </footer>
     </div>

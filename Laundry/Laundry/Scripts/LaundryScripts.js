@@ -1,11 +1,15 @@
-﻿function AddOrder(){
-	$.ajax({
-		type: "GET",
-		url: 'MyOrders/AddOrder',
-		success: function(data){
-			$("#NewOrder").html(data);
-		}
-	});
+﻿function AddOrder() {
+    $.ajax({
+        type: "GET",
+        url: 'MyOrders/AddOrder',
+        success: function (data) {
+            $("#NewOrder").html(data);
+        }
+    });
+}
+
+function ModifyOrder() {
+    $("#parts").attr("visible", true);
 }
 
 function AddPart(){
