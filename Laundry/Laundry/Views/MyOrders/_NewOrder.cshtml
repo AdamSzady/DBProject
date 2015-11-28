@@ -40,7 +40,8 @@
 <br />
 @if (Model.Services != null)
 {
-    @Html.DropDownList("prices", Model.Prices.Select(c=> new SelectListItem { Text = c.ServiceName +"  "+ c.ThingName +" "+ c.Value, Value = c.PriceId.ToString()}))
+    @Html.DropDownList("prices", Model.Prices.Select(c=> new SelectListItem { Text = c.ServiceName +"  "+ c.ThingName +" "+ c.Value + "zł", Value = c.PriceId.ToString()}))
+    <br />
     @Html.Label("Liczba:")
     @Html.TextBox("number")
     <button class="btn btn-default btn-success center" onclick="AddPart()">Dodaj</button>

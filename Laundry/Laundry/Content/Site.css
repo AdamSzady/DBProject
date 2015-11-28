@@ -124,5 +124,27 @@ hr {
   height: 1px;
   margin: 20px auto;
   border: none;
-  background-image: linear-gradient(to right, transparent, #808080, #808080, transparent); }
+  background-image: linear-gradient(to right, transparent, #808080, #808080, transparent);
 }
+
+.pricing-table {
+    margin-top: 4em;
+    border-collapse: separate;
+    border-spacing: 1em;  
+}
+
+.things-table {
+    border-collapse: separate;
+    border-spacing: 0.5em;  
+}
+
+.services-table {
+    border-collapse: separate;
+    border-spacing: 0.5em;  
+}
+
+.pricing-table tr:nth-child(1) th {
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+

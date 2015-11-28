@@ -1,17 +1,19 @@
 ﻿@using MvcCheckBoxList.Model
 @model Laundry.Models.AddThingModel
 @{
-    ViewBag.Title = "AddThing";
+    ViewBag.Title = "Nowa rzecz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddPosition</h2>
+<h1 class="text-center">@ViewBag.Title</h1>
 
 @using (Html.BeginForm("AddThing", "Pricing", FormMethod.Post))
 {
-@Html.Label("Wpisz nazwę rzeczy")
-    @Html.TextBoxFor(m => m.Thing.Name)
-    
-    @Html.CheckBoxListFor(m => m.Posted.ServiceIDs, m => m.Services, s => s.Id, s => s.Name,  m => m.Selected, Position.Horizontal)
-    <input type="submit" value="Dodaj"/>
+@Html.Label("Nazwa rzeczy", new { @class = "center" })
+    @Html.TextBoxFor(m => m.Thing.Name, new { @class = "center" })
+    <br />
+    <div class="center">
+        @Html.CheckBoxListFor(m => m.Posted.ServiceIDs, m => m.Services, s => s.Id, s => s.Name,  m => m.Selected, Position.Horizontal)
+    </div>
+    <input class="center btn btn-success" type="submit" value="Dodaj"/>
 }

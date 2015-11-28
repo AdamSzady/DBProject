@@ -65,12 +65,11 @@ namespace Laundry.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddOrderPart(int orderId, int number, int priceId)
+        public ActionResult AddOrderPart(int orderId, int priceId, int number)
         {
             //           return PartialView("_NewOrder");
             orderService.AddPart(orderId, priceId, number);
             return Json(true, JsonRequestBehavior.DenyGet);
-
         }
     }
-}
+} 

@@ -2,28 +2,50 @@
 @model Laundry.Models.DeleteThingModel
 
 @{
-    ViewBag.Title = "DeleteThing";
+    ViewBag.Title = "Usuń";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DeleteThing</h2>
+<h1 class="text-center">@ViewBag.Title</h1>
 <div class="container">
-    <div class="col-md-6">
-        @foreach (var thing in Model.Things)
-        {
-            <div class="row">
-                @thing.Name
-                @Html.ActionLink("Usuń", "Delete", new { id = thing.Id, what =  ThingOrService.Thing})
-            </div>
-        }
-    </div>
-    <div class="col-md-6">
-        @foreach (var thing in Model.Services)
-        {
-            <div class="row">
-                @thing.Name
-                @Html.ActionLink("Usuń", "Delete", new { id = thing.Id, what = ThingOrService.Service })
-            </div>
-        }
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-3 col-xs-offset-3">
+            <h4 class="text-center">Rzeczy</h4>
+            <table class="things-table center">
+                @foreach (var thing in Model.Things)
+                {
+                    <tr>
+                        <td>
+                            @thing.Name
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-danger" href="@Url.Action("Delete", new { id = thing.Id, what = ThingOrService.Thing})">
+                                Usuń
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <h4 class="text-center">Usługi</h4>
+            <table class="services-table center">
+                @foreach (var thing in Model.Services)
+                {
+                    <tr>
+                        <td>
+                            @thing.Name
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-danger" href="@Url.Action("Delete", new { id = thing.Id, what = ThingOrService.Thing})">
+                                Usuń
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
 </div>

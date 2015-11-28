@@ -7,16 +7,31 @@
 @using Laundry.Models
 @model Pricing
 
-@if(User.IsInRole("Worker"))
+@if (User.IsInRole("Worker"))
 {
-    @Html.ActionLink("Dodaj rzecz", "AddThing")
-    <br/>
-    @Html.ActionLink("Dodaj usługę  ", "AddService")
-    <br />
-    @Html.ActionLink("Usuń rzecz lub usługę", "DeleteThing")
-
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2 col-xs-offset-1 col-sm-2 col-sm-offset-1 col-md-2 col-md-offset-1">
+                <a class="btn btn-primary" href="@Url.Action("AddThing")">Dodaj rzecz</a>
+            </div>
+            <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2">
+                <a class="btn btn-primary" href="@Url.Action("AddService")">Dodaj usługę</a>
+            </div>
+            <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2">
+                <a class="btn btn-primary" href="@Url.Action("DeleteThing")">Usuń</a>
+            </div>
+        </div>
+    </div>
 }
-<table>
+
+<table class="center pricing-table">
+    <tr>
+        <th>Usługa</th>
+        <th>Rzecz</th>
+        <th>Cena</th>
+        <th>Modyfikuj</th>
+        <th>Usuń</th>
+    </tr>
     @foreach (var price in Model.Prices)
     {
         <tr id="@price.PriceId">
@@ -28,16 +43,19 @@
             </td>
             <td class="value">
                 @price.Value
+                zł
             </td>
             @if (User.IsInRole("Worker"))
             {
                 <td class="button">
-                    <button id="button_@price.PriceId" state="0" onclick="Modify(@price.PriceId)">Modyfikuj</button>
+                    <button class="btn btn-xs btn-warning" id="button_@price.PriceId" state="0" onclick="Modify(@price.PriceId)">Modyfikuj</button>
                 </td>
-                <td >
-                   @Html.ActionLink("Usuń", "DeletePrice", new { id = price.PriceId }, new { @class="btn"})
+                <td>
+                    <a class="btn btn-xs btn-danger" href="@Url.Action("DeletePrice", new { id = price.PriceId })">
+                        Usuń
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
                 </td>
-
             }
         </tr>
     }
