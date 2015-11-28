@@ -19,31 +19,79 @@
     <br />
     if (Model.OrderParts == null)
     {
-        <input class="btn btn-default btn-success center" type="submit" value="Dodaj"/>
+        <input class="btn btn-default btn-success center" type="submit" value="Dodaj" />
     }
 }
 <div id="parts">
     @if (Model.OrderParts != null)
     {
-        foreach (var p in Model.OrderParts)
-        {
-            <div>
-                @p.Service
-                @p.Thing
-                @p.Number
-                <br />
-            </div>
-        }
+        <h3 class="text-center">Zawartość zamówienia</h3>
+        <table class="myOrderParts-table center">
+            <tr>
+                <th>
+                    Usługa
+                </th>
+                <th>
+                    Rzecz
+                </th>
+                <th>
+                    Ilość
+                </th>
+            </tr>
+            @foreach (var p in Model.OrderParts)
+            {
+                <tr>
+                    <td>
+                        @p.Service
+                    </td>
+                    <td>
+                        @p.Thing
+                    </td>
+                    <td>
+                        @p.Number
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    @if (Model.OrderParts == null)
+    {
+        <h3 class="text-center">Zawartość zamówienia</h3>
+        <table class="myOrderParts-table center">
+            <tr>
+                <th>
+                    Usługa
+                </th>
+                <th>
+                    Rzecz
+                </th>
+                <th>
+                    Ilość
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    ...
+                </td>
+                <td>
+                    ...
+                </td>
+                <td>
+                    ...
+                </td>
+            </tr>
+        </table>
     }
 </div>
 <br />
 <br />
 @if (Model.Services != null)
 {
-    @Html.DropDownList("prices", Model.Prices.Select(c=> new SelectListItem { Text = c.ServiceName +"  "+ c.ThingName +" "+ c.Value + "zł", Value = c.PriceId.ToString()}))
+    @Html.DropDownList("prices", Model.Prices.Select(c => new SelectListItem { Text = c.ServiceName + "  " + c.ThingName + " " + c.Value + "zł", Value = c.PriceId.ToString() }), new { @class = "newOrder-input" })
     <br />
-    @Html.Label("Liczba:")
-    @Html.TextBox("number")
+    @Html.Label("Ilość:")
+    <input name="number" class="newOrder-input" />
+    <br />
     <button class="btn btn-default btn-success center" onclick="AddPart()">Dodaj</button>
 }
 

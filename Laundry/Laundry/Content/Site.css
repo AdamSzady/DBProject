@@ -1,9 +1,6 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-}
-
-body {
     font-size: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -93,7 +90,7 @@ h6 {
     box-shadow: 2px 2px 4px 1px black; 
 }
 
-.newOrder {
+#NewOrder {
     width: 30%;
     display: table;
     margin: auto;
@@ -106,13 +103,8 @@ h6 {
 }
 
 .newOrder-input {
-    padding: 0 1em 0 1em;
     display: block;
     width: 100%;
-}
-
-#parts {
-    display: none;
 }
 
 #parts[visible="true"] {
@@ -133,6 +125,11 @@ hr {
     border-spacing: 1em;  
 }
 
+.pricing-table tr:nth-child(1) th {
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
 .things-table {
     border-collapse: separate;
     border-spacing: 0.5em;  
@@ -143,8 +140,25 @@ hr {
     border-spacing: 0.5em;  
 }
 
-.pricing-table tr:nth-child(1) th {
+.myOrders-table {
+    margin-top: 4em;
+    margin-bottom: 2em;
+    border-collapse: separate;
+    border-spacing: 1em;  
+}
+
+.myOrders-table tr:nth-child(1) th {
     border-bottom: 1px solid black;
     text-align: center;
 }
 
+.myOrderParts-table {
+    margin-top: 5em;
+    border-collapse: separate;
+    border-spacing: 1em;  
+}
+
+.myOrderParts-table tr:nth-child(1) th {
+    border-bottom: 1px solid black;
+    text-align: center;
+}
