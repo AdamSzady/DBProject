@@ -9,18 +9,10 @@
 
 @if (User.IsInRole("Worker"))
 {
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-2 col-xs-offset-1 col-sm-2 col-sm-offset-1 col-md-2 col-md-offset-1">
-                <a class="btn btn-primary" href="@Url.Action("AddThing")">Dodaj rzecz</a>
-            </div>
-            <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2">
-                <a class="btn btn-primary" href="@Url.Action("AddService")">Dodaj usługę</a>
-            </div>
-            <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2">
-                <a class="btn btn-primary" href="@Url.Action("DeleteThing")">Usuń</a>
-            </div>
-        </div>
+    <div class="center">
+        <a class="btn btn-primary m-1em" href="@Url.Action("AddThing")">Dodaj rzecz</a>
+        <a class="btn btn-primary m-1em" href="@Url.Action("AddService")">Dodaj usługę</a>
+        <a class="btn btn-primary m-1em" href="@Url.Action("DeleteThing")">Usuń</a>
     </div>
 }
 
@@ -29,8 +21,11 @@
         <th>Usługa</th>
         <th>Rzecz</th>
         <th>Cena</th>
-        <th>Modyfikuj</th>
-        <th>Usuń</th>
+        @if (User.IsInRole("Worker"))
+        {
+            <th>Modyfikuj</th>
+            <th>Usuń</th>
+        }
     </tr>
     @foreach (var price in Model.Prices)
     {
