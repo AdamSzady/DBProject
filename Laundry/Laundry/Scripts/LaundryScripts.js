@@ -4,6 +4,7 @@
         url: 'MyOrders/AddOrder',
         success: function (data) {
             $("#NewOrder").html(data);
+            location.replace("/MyOrders#NewOrder");
         }
     });
 }

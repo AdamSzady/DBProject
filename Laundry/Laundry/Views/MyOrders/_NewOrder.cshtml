@@ -3,7 +3,7 @@
 
 @Html.HiddenFor(m => m.Order.Id, new { @id = "orderId" })
 
-@using (Html.BeginForm("AddOrder", "MyOrders", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddOrder", "MyOrders", FormMethod.Post, new { @class = "form-horizontal newOrder", role = "form" }))
 {
     @Html.Label("Adres nadania:", new { @class = "newOrder-label" })
     @Html.TextBoxFor(m => m.Order.GivingAddress, new { @class = "newOrder-input" })
