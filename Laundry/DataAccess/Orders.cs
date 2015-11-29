@@ -14,6 +14,12 @@ namespace DataAccess
     
     public partial class Orders
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Orders()
+        {
+            this.OrderParts = new HashSet<OrderParts>();
+        }
+    
         public int Id { get; set; }
         public string ClientId { get; set; }
         public string WorkerId { get; set; }
@@ -24,6 +30,7 @@ namespace DataAccess
         public Nullable<double> Price { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual OrderParts OrderParts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderParts> OrderParts { get; set; }
     }
 }

@@ -45,7 +45,8 @@ namespace Laundry.Controllers
             NewOrder model = new NewOrder {
                 Order = new OrdersDTO{ }
             };
-            return PartialView("_NewOrder", model);
+            //            return PartialView("_NewOrder", model);
+            return View("NewOrder", model);
         }
 
         [HttpPost]
@@ -53,23 +54,33 @@ namespace Laundry.Controllers
         {
             model.Order.ClientId = User.Identity.GetUserId();
             model.Order.Id = orderService.AddOrder(model.Order);
-            model.Things = orderService.GetThingsList();
-            model.Services = orderService.GetServicesList();
             model.Prices = priceService.GetPricesList();
-            var model2 = new MyOrders
-            {
-                Orders = orderService.GetOrdersByClient(User.Identity.GetUserId()),
-                NewOrder = model,
-            };
-            return View("Index", model2);          
+
+            return View("NewOrder", model);          
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult AddOrderPart(int orderId, int priceId, int number)
         {
-            //           return PartialView("_NewOrder");
             orderService.AddPart(orderId, priceId, number);
-            return Json(true, JsonRequestBehavior.DenyGet);
+
+            var model = new NewOrder
+            {
+                Order = orderService.GetOrderById(orderId),
+                OrderParts = orderService.GetOrderParts(orderId).ToList(),
+                Prices = priceService.GetPricesList()
+            };
+
+            return View("NewOrder", model);
         }
+
+        //[HttpPost]
+        //public ActionResult AddOrderPart(NewOrder model)
+        //{
+        //    //           return PartialView("_NewOrder");
+        //    var part = orderService.AddPart(model.Order.Id, model.PriceId, model.Number);
+        //    model.OrderParts.Add(part);
+        //    return View("NewOrder", model);
+        //}
     }
 } 

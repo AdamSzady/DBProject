@@ -242,6 +242,7 @@
     <Content Include="Views\Pricing\AddService.cshtml" />
     <Content Include="Views\Pricing\DeleteThing.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\MyOrders\NewOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -85,7 +85,7 @@
 </div>
 <br />
 <br />
-@if (Model.Services != null)
+@if (Model.Prices != null)
 {
     @Html.DropDownList("prices", Model.Prices.Select(c => new SelectListItem { Text = c.ServiceName + "  " + c.ThingName + " " + c.Value + "zł", Value = c.PriceId.ToString() }), new { @class = "newOrder-input" })
     <br />

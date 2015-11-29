@@ -14,6 +14,7 @@ namespace DataAccess
     
     public partial class OrderParts
     {
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public Nullable<int> PriceId { get; set; }
         public Nullable<int> Number { get; set; }

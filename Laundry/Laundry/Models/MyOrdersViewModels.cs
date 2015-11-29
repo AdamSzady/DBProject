@@ -16,9 +16,9 @@ namespace Laundry.Models
     public class NewOrder
     {
         public OrdersDTO Order { get; set; }
-        public IEnumerable<OrderPartsDTO> OrderParts { get; set; }
-        public IEnumerable<ThingsDTO> Things { get; set; }
-        public IEnumerable<ServicesDTO> Services { get; set; }
+        public List<OrderPartsDTO> OrderParts { get; set; }
         public IEnumerable<Price> Prices { get; set; }
+        public int PriceId { get; set; }
+        public int Number { get; set; }
     }
 }

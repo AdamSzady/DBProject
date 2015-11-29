@@ -28,8 +28,10 @@ namespace BusinessLogic
             return newOrder.Id;
         }
 
-        public void AddPart(int orderId, int priceId, int number)
+        public OrderPartsDTO AddPart(int orderId, int priceId, int number)
         {
+            Mapper.CreateMap<OrderParts, OrderPartsDTO>();
+
             var part = new OrderParts
             {
                 OrderId = orderId,
@@ -37,6 +39,8 @@ namespace BusinessLogic
                 Number = number,
             };
             dbContext.OrderParts.Add(part);
+            dbContext.SaveChanges();
+            return Mapper.Map<OrderParts, OrderPartsDTO>(part);
         }
 
         public IEnumerable<SingleOrder> GetOrdersByClient(string userId)
@@ -66,6 +70,21 @@ namespace BusinessLogic
                 });
             }
             return list;
+        }
+
+        public OrdersDTO GetOrderById(int id)
+        {
+            Mapper.CreateMap<Orders, OrdersDTO>();
+            var order = dbContext.Orders.Find(id);
+            return Mapper.Map<Orders, OrdersDTO>(order);
+        }
+
+        public IEnumerable<OrderPartsDTO> GetOrderParts(int id)
+        {
+            var parts = dbContext.OrderParts
+                .Where(p => p.OrderId == id)
+                .Select(p => new OrderPartsDTO { Service = p.Prices.Services.Name, Thing = p.Prices.Things.Name, Number = p.Number ?? 0 }).ToList();
+            return parts;
         }
 
         public IEnumerable<ThingsDTO> GetThingsList()

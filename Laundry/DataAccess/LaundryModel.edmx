@@ -56,12 +56,11 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderParts">
           <Key>
-            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="PriceId" Type="int" />
           <Property Name="Number" Type="int" />
@@ -102,9 +101,9 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__OrderPart__Order__25869641">
+        <Association Name="FK__OrderPart__Order__37A5467C">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrderParts" Type="Self.OrderParts" Multiplicity="0..1" />
+          <End Role="OrderParts" Type="Self.OrderParts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="Id" />
@@ -114,7 +113,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderPart__Price__267ABA7A">
+        <Association Name="FK__OrderPart__Price__38996AB5">
           <End Role="Prices" Type="Self.Prices" Multiplicity="0..1" />
           <End Role="OrderParts" Type="Self.OrderParts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -126,7 +125,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__ClientId__276EDEB3">
+        <Association Name="FK__Orders__ClientId__29572725">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +137,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prices__ServiceI__29572725">
+        <Association Name="FK__Prices__ServiceI__2B3F6F97">
           <End Role="Services" Type="Self.Services" Multiplicity="1" />
           <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +149,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prices__ThingId__286302EC">
+        <Association Name="FK__Prices__ThingId__2A4B4B5E">
           <End Role="Things" Type="Self.Things" Multiplicity="1" />
           <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,34 +223,28 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderParts" EntityType="Self.OrderParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prices" EntityType="Self.Prices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderParts" EntityType="Self.OrderParts" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OrderParts].[OrderId] AS [OrderId], 
-    [OrderParts].[PriceId] AS [PriceId], 
-    [OrderParts].[Number] AS [Number]
-    FROM [dbo].[OrderParts] AS [OrderParts]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__OrderPart__Order__25869641" Association="Self.FK__OrderPart__Order__25869641">
+          <AssociationSet Name="FK__OrderPart__Order__37A5467C" Association="Self.FK__OrderPart__Order__37A5467C">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderParts" EntitySet="OrderParts" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderPart__Price__267ABA7A" Association="Self.FK__OrderPart__Price__267ABA7A">
+          <AssociationSet Name="FK__OrderPart__Price__38996AB5" Association="Self.FK__OrderPart__Price__38996AB5">
             <End Role="Prices" EntitySet="Prices" />
             <End Role="OrderParts" EntitySet="OrderParts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__ClientId__276EDEB3" Association="Self.FK__Orders__ClientId__276EDEB3">
+          <AssociationSet Name="FK__Orders__ClientId__29572725" Association="Self.FK__Orders__ClientId__29572725">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Prices__ServiceI__29572725" Association="Self.FK__Prices__ServiceI__29572725">
+          <AssociationSet Name="FK__Prices__ServiceI__2B3F6F97" Association="Self.FK__Prices__ServiceI__2B3F6F97">
             <End Role="Services" EntitySet="Services" />
             <End Role="Prices" EntitySet="Prices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Prices__ThingId__286302EC" Association="Self.FK__Prices__ThingId__286302EC">
+          <AssociationSet Name="FK__Prices__ThingId__2A4B4B5E" Association="Self.FK__Prices__ThingId__2A4B4B5E">
             <End Role="Things" EntitySet="Things" />
             <End Role="Prices" EntitySet="Prices" />
           </AssociationSet>
@@ -281,11 +274,11 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <EntitySet Name="AspNetUserClaims" EntityType="LaundryModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="LaundryModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="LaundryModel.AspNetUsers" />
+          <EntitySet Name="OrderParts" EntityType="LaundryModel.OrderParts" />
           <EntitySet Name="Orders" EntityType="LaundryModel.Orders" />
           <EntitySet Name="Prices" EntityType="LaundryModel.Prices" />
           <EntitySet Name="Services" EntityType="LaundryModel.Services" />
           <EntitySet Name="Things" EntityType="LaundryModel.Things" />
-          <EntitySet Name="OrderParts" EntityType="LaundryModel.OrderParts" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -294,23 +287,23 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__ClientId__276EDEB3" Association="LaundryModel.FK__Orders__ClientId__276EDEB3">
+          <AssociationSet Name="FK__Orders__ClientId__29572725" Association="LaundryModel.FK__Orders__ClientId__29572725">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderPart__Order__25869641" Association="LaundryModel.FK__OrderPart__Order__25869641">
+          <AssociationSet Name="FK__OrderPart__Order__37A5467C" Association="LaundryModel.FK__OrderPart__Order__37A5467C">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderParts" EntitySet="OrderParts" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderPart__Price__267ABA7A" Association="LaundryModel.FK__OrderPart__Price__267ABA7A">
+          <AssociationSet Name="FK__OrderPart__Price__38996AB5" Association="LaundryModel.FK__OrderPart__Price__38996AB5">
             <End Role="Prices" EntitySet="Prices" />
             <End Role="OrderParts" EntitySet="OrderParts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Prices__ServiceI__29572725" Association="LaundryModel.FK__Prices__ServiceI__29572725">
+          <AssociationSet Name="FK__Prices__ServiceI__2B3F6F97" Association="LaundryModel.FK__Prices__ServiceI__2B3F6F97">
             <End Role="Services" EntitySet="Services" />
             <End Role="Prices" EntitySet="Prices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Prices__ThingId__286302EC" Association="LaundryModel.FK__Prices__ThingId__286302EC">
+          <AssociationSet Name="FK__Prices__ThingId__2A4B4B5E" Association="LaundryModel.FK__Prices__ThingId__2A4B4B5E">
             <End Role="Things" EntitySet="Things" />
             <End Role="Prices" EntitySet="Prices" />
           </AssociationSet>
@@ -366,8 +359,19 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__Orders__ClientId__276EDEB3" FromRole="AspNetUsers" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__Orders__ClientId__29572725" FromRole="AspNetUsers" ToRole="Orders" />
           <NavigationProperty Name="AspNetRoles" Relationship="LaundryModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="OrderParts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="PriceId" Type="Int32" />
+          <Property Name="Number" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__OrderPart__Order__37A5467C" FromRole="OrderParts" ToRole="Orders" />
+          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__OrderPart__Price__38996AB5" FromRole="OrderParts" ToRole="Prices" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -381,8 +385,8 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <Property Name="ReceiveAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
           <Property Name="Price" Type="Double" />
-          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK__Orders__ClientId__276EDEB3" FromRole="Orders" ToRole="AspNetUsers" />
-          <NavigationProperty Name="OrderParts" Relationship="LaundryModel.FK__OrderPart__Order__25869641" FromRole="Orders" ToRole="OrderParts" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK__Orders__ClientId__29572725" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderParts" Relationship="LaundryModel.FK__OrderPart__Order__37A5467C" FromRole="Orders" ToRole="OrderParts" />
         </EntityType>
         <EntityType Name="Prices">
           <Key>
@@ -392,9 +396,9 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           <Property Name="ThingId" Type="Int32" Nullable="false" />
           <Property Name="ServiceId" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" />
-          <NavigationProperty Name="OrderParts" Relationship="LaundryModel.FK__OrderPart__Price__267ABA7A" FromRole="Prices" ToRole="OrderParts" />
-          <NavigationProperty Name="Services" Relationship="LaundryModel.FK__Prices__ServiceI__29572725" FromRole="Prices" ToRole="Services" />
-          <NavigationProperty Name="Things" Relationship="LaundryModel.FK__Prices__ThingId__286302EC" FromRole="Prices" ToRole="Things" />
+          <NavigationProperty Name="OrderParts" Relationship="LaundryModel.FK__OrderPart__Price__38996AB5" FromRole="Prices" ToRole="OrderParts" />
+          <NavigationProperty Name="Services" Relationship="LaundryModel.FK__Prices__ServiceI__2B3F6F97" FromRole="Prices" ToRole="Services" />
+          <NavigationProperty Name="Things" Relationship="LaundryModel.FK__Prices__ThingId__2A4B4B5E" FromRole="Prices" ToRole="Things" />
         </EntityType>
         <EntityType Name="Services">
           <Key>
@@ -402,7 +406,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ServiceI__29572725" FromRole="Services" ToRole="Prices" />
+          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ServiceI__2B3F6F97" FromRole="Services" ToRole="Prices" />
         </EntityType>
         <EntityType Name="Things">
           <Key>
@@ -410,17 +414,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ThingId__286302EC" FromRole="Things" ToRole="Prices" />
-        </EntityType>
-        <EntityType Name="OrderParts">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="PriceId" Type="Int32" />
-          <Property Name="Number" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="LaundryModel.FK__OrderPart__Order__25869641" FromRole="OrderParts" ToRole="Orders" />
-          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__OrderPart__Price__267ABA7A" FromRole="OrderParts" ToRole="Prices" />
+          <NavigationProperty Name="Prices" Relationship="LaundryModel.FK__Prices__ThingId__2A4B4B5E" FromRole="Things" ToRole="Prices" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -450,7 +444,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__ClientId__276EDEB3">
+        <Association Name="FK__Orders__ClientId__29572725">
           <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="LaundryModel.Orders" Role="Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -462,9 +456,9 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderPart__Order__25869641">
+        <Association Name="FK__OrderPart__Order__37A5467C">
           <End Type="LaundryModel.Orders" Role="Orders" Multiplicity="1" />
-          <End Type="LaundryModel.OrderParts" Role="OrderParts" Multiplicity="0..1" />
+          <End Type="LaundryModel.OrderParts" Role="OrderParts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="Id" />
@@ -474,7 +468,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderPart__Price__267ABA7A">
+        <Association Name="FK__OrderPart__Price__38996AB5">
           <End Type="LaundryModel.Prices" Role="Prices" Multiplicity="0..1" />
           <End Type="LaundryModel.OrderParts" Role="OrderParts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -486,7 +480,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prices__ServiceI__29572725">
+        <Association Name="FK__Prices__ServiceI__2B3F6F97">
           <End Type="LaundryModel.Services" Role="Services" Multiplicity="1" />
           <End Type="LaundryModel.Prices" Role="Prices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -498,7 +492,7 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prices__ThingId__286302EC">
+        <Association Name="FK__Prices__ThingId__2A4B4B5E">
           <End Type="LaundryModel.Things" Role="Things" Multiplicity="1" />
           <End Type="LaundryModel.Prices" Role="Prices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -565,6 +559,16 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderParts">
+            <EntityTypeMapping TypeName="LaundryModel.OrderParts">
+              <MappingFragment StoreEntitySet="OrderParts">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="LaundryModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
@@ -602,15 +606,6 @@ warning 6002: The table/view 'Laundry.dbo.OrderParts' does not have a primary ke
               <MappingFragment StoreEntitySet="Things">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderParts">
-            <EntityTypeMapping TypeName="LaundryModel.OrderParts">
-              <MappingFragment StoreEntitySet="OrderParts">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
